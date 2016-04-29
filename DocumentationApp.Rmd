@@ -1,0 +1,90 @@
+---
+title: "Developing Data Products"
+author: "Jorge Antunes"
+date: "29 de Abril de 2016"
+output: html_document
+---
+
+####Shiny App
+#Edgar Anderson's Iris Data Exploration
+
+##Summary
+For the Developing Data Products Course Project, I have developed a Shiny Application for use with the Iris data in R.
+
+##App Purpose
+The delivered **Shiny App** enables the exploration of the *Edgar Anderson's Iris Data*.
+This dataset is an excelent source to try and experience the **Prediction functions** learned during the Data Science Specialization course.
+
+Prediction and Exploratory Data Anlaysis are the main focus of the proposed App
+
+###Data Source
+To start the Data Exploration it is necessary to acquire the data which is obtained through running the code
+```{r eval=FALSE, echo = TRUE}
+data(iris)
+```
+###App Map
+The App is constituted by several tabs and inside each different approachs to Extract Knowledge
+
+* Iris Dataset
+* Exploratoy Data Analysis
+  + Summary
+  + Principal Component Analysis (PCA)
+* KNN (K-Nearest Neighbors)
+* Decision Tree
+* Other Predictors
+
+###App Features
+The presents several features from input to output
+
+####Output
+Among them we can see the following kinds:
+* Plots and Graphs
+* Tables
+* Text
+
+####Input
+The used input options are:
+
+* slider input
+
+* selection input
+
+####In/Out Management
+Due to the high computational requirements the reactive abilities have been introduced
+
+The **Action Button** was the input trigger generating a reactive pattern
+
+we used the **observeEvent** and **reactiveValues** to solve the input / output
+
+*In order to face the reactive erros, due to the lack of initial input, we create a default which didn't allow NULL*
+
+###Exploratory Data Analysis and Prediction
+
+We begun our journey by explore the iris dataset
+
+1. Correlation visual and Pearson's to see the possible patterns
+
+2. Global Statistics
+
+3. Principal Component analysis to understand the minimum data parameters required to explain the all data (intrinsic knowledge)
+
+4. KNN (K-Nearest Neighbors) to create a segmentation with diffent input parameters
+  + Pre-Process
+  + Fold
+  + Repetition
+  
+5. Decision Tree (with different Partition Number)
+
+6. Other Predictors
+  + Support Vector Machines with Radial Basis Function Kernel
+  + Random forests
+
+####Predictors
+It is extremely important to show how different Models behave as well the change of the inputs can improve the model accuracy.
+
+###App Location
+
+The Shiny App is located [here](https://jorgeantunes.shinyapps.io/DevDataProd/)
+
+**Please use the App**
+*Note: Some of the Predictors take is time to deliver some output, just be patient*

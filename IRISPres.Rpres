@@ -1,0 +1,108 @@
+Edgar Anderson's Iris Data
+========================================================
+author: Jorge Antunes
+date: 04-29-2016
+transition: linear
+transition-speed: slow
+
+The iris data set is a favorite example for many Data Scientists
+
+The exploration of the iris dataset enables all sort of analysis and techniques
+
+Let's see what can we do with it
+
+
+Exploratory Data Analysis
+========================================================
+class: explore
+transition: linear
+transition-speed: slow
+For example, explore the "pairs", how important is to get a first insigth
+
+```{r, echo = FALSE}
+data(iris)
+par(mfrow=c(1,2))
+pairs(iris[1:4], main = "Edgar Anderson's Iris Data", pch = 21, cex = 1.5, cex.axis = 1.5, cex.main = 1.5, bg = c("red","green3","blue")[unclass(iris$Species)],lower.panel = NULL)
+```
+
+Segmentation with K-Nearest Neighbor
+========================================================
+class: predictor
+Using a KNN "predictor" you can see the Accuracy,
+
+How easy it is and scalable it could be!!!
+
+
+```{r, echo = FALSE}
+library(caret)
+data(iris)
+TrainData <- iris[,1:4]
+TrainClasses <- iris[,5]
+knn <- train(TrainData, TrainClasses,
+                     method = "knn",
+                     preProcess = c("center","scale"),
+                     tuneLength = 10,
+                     trControl = trainControl(method = "repeatedcv",
+                                              number=2,
+                                              repeats=2))
+    
+confusionMatrix(knn, "none")    
+
+```
+Check the Accuracy (Keep it in mind)
+
+
+Predictor Random Forests and SVM
+========================================================
+class: predictor
+Random Forests
+```{r, echo = FALSE}
+library(caret)
+library(rpart.plot)
+data(iris)
+toDivide <- createDataPartition(y = iris$Species, p = 0.6, list = FALSE)
+dtTraining <- iris[toDivide,]
+dtTesting <- iris[-toDivide,]
+modFitRF <- train(dtTraining$Species ~ .,
+                         data = dtTraining,
+                         method = "rf", 
+                         preProcess = c("center", "scale"), 
+                         trControl = trainControl(method = "cv", 
+                                                  number = 2))
+      
+predictionsRF <- predict(modFitRF, newdata = dtTesting)
+otherALL1 <- confusionMatrix(predictionsRF, dtTesting$Species)
+otherALL1[3]
+```
+Support Vector Machines with Radial Basis Function Kernel
+```{r, echo = FALSE}
+library(caret)
+library(rpart.plot)
+data(iris)
+toDivide <- createDataPartition(y = iris$Species, p = 0.6, list = FALSE)
+dtTraining <- iris[toDivide,]
+dtTesting <- iris[-toDivide,]
+modFitSVM <- train(dtTraining$Species ~ .,
+                         data = dtTraining,
+                         method = "svmRadial", 
+                         preProcess = c("center", "scale"), 
+                         trControl = trainControl(method = "cv", 
+                                                  number = 2))
+      
+predictionsSVM <- predict(modFitSVM, newdata = dtTesting)
+otherALL2 <- confusionMatrix(predictionsSVM, dtTesting$Species)
+otherALL2[3]
+```
+Conclusions
+========================================================
+class: conclusion
+- All the predictors have high accuracy results
+- How important is the Algorithm
+- How Important is the Pre-Process
+
+For me everything is important, but above all, the adaptation...
+
+Every model fit better to a subject than another, that's why is so important to be a Data Scientist, the ability to select the best model...
+
+...and by Model I mean: Since the Pre-Process until the predictor parameters
+
