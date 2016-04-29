@@ -1,0 +1,9 @@
+name: DevDataProd
+account: jorgeantunes
+server: shinyapps.io
+appId: 98901
+bundleId: 437833
+url: https://jorgeantunes.shinyapps.io/DevDataProd/
+when: 1461946886.401
+asMultiple: FALSE
+asStatic: FALSE
