@@ -30,8 +30,12 @@ shinyServer(
     #observeEvent(input$goR16,{v$aviaoR16 <- input$aviaoR16})
     
     output$Info <- renderPrint({
-      
-      cat("Please click here to find the Documentation and Explanation of the Shiny App (by this the help is considered inside the Shiny App)")
+      #cat("Extra info")
+      writeLines("Summary\n
+                 For the Developing Data Products Course Project, I have developed a Shiny Application for use with the Iris data in R.\n
+                 App Purpose\n
+                 The delivered Shiny App enables the exploration of the Edgar Anderson's Iris Data. This dataset is an excelent source to try and experience the Prediction functions learned during the Data Science Specialization course.\n
+                 Please click below to find Extra Documentation and Explanation of the Shiny App (by this the help is considered inside the Shiny App)")
       
     })
     
